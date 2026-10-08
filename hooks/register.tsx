@@ -4,6 +4,7 @@ import type { EngineInterface, Register } from 'claude-code'
 import type { Post } from '../types'
 
 const SERVER = 'daily-dev'
+const BRAND = '#CE3DF3' // daily.dev purple
 const posts = atom({ plugin: 'dailydev-feed', key: 'posts' } as const, [])
 const index = atom({ plugin: 'dailydev-feed', key: 'index' } as const, 0)
 const isHidden = atom({ plugin: 'dailydev-feed', key: 'isHidden' } as const, false)
@@ -18,6 +19,7 @@ type RawPost = {
   numUpvotes?: number
   numComments?: number
   source?: { name?: string }
+  tags?: string[]
 }
 
 export function toPosts(text: string): Post[] {
@@ -34,6 +36,7 @@ export function toPosts(text: string): Post[] {
       upvotes: p.numUpvotes ?? 0,
       comments: p.numComments ?? 0,
       commentsUrl: p.commentsPermalink ?? p.url!,
+      tags: p.tags ?? [],
     }))
 }
 
@@ -41,13 +44,16 @@ export function toPosts(text: string): Post[] {
 const CACHE_MS = 8 * 60 * 60 * 1000
 type Cache = { at: number; posts: Post[]; index: number }
 
-async function load($: EngineInterface) {
+// Returns false when the cache is missing or stale.
+async function loadCache($: EngineInterface) {
   const cache = (await $.store.get('cache')) as Cache | undefined
-  if (cache && (await $.clock.now()) - cache.at < CACHE_MS) {
-    await update($, posts, () => cache.posts)
-    await update($, index, () => cache.index)
-    return
-  }
+  if (!cache || (await $.clock.now()) - cache.at >= CACHE_MS) return false
+  await update($, posts, () => cache.posts)
+  await update($, index, () => cache.index)
+  return true
+}
+
+async function fetchFeed($: EngineInterface) {
   try {
     const res = await $.mcp.call(SERVER, 'getFeedsForyou', { limit: 30 })
     const text = res.content.find(b => b.type === 'text')?.text
@@ -77,7 +83,8 @@ export const register: Register = on => {
       name: 'dailydev',
       description: 'Show or hide daily.dev posts while Claude works',
     })
-    void load($)
+    // Cache read is fast; the network fetch must not hold up session start.
+    if (!(await loadCache($))) void fetchFeed($)
     return next(e)
   })
 
@@ -99,25 +106,48 @@ export const register: Register = on => {
     if (!post) return next(e)
 
     const { Box, Text, Link, Button } = $.ui.resolve(e)
-    const summary = post.summary.length > 420 ? post.summary.slice(0, 420) + '…' : post.summary
+    const width = e.props.bodyColumns
+    // ~3 lines of summary inside the frame (2 border + 2 padding columns).
+    const room = Math.max(80, (width - 4) * 3)
+    const summary = post.summary.length > room ? post.summary.slice(0, room - 1).trimEnd() + '…' : post.summary
+    const tags = (post.tags ?? []).slice(0, 3).map(t => `#${t}`).join(' ')
+    const meta = [post.source, `${post.readTime} min read`, `▲ ${post.upvotes}`, `💬 ${post.comments}`, tags]
+      .filter(Boolean)
+      .join('  ·  ')
 
     return (
-      <Box flexDirection="column">
-        <Text color="claude" bold>
-          daily.dev · {post.title}
+      <Box flexDirection="column" borderStyle="round" borderColor={BRAND} paddingX={1} width={width}>
+        <Box justifyContent="space-between">
+          <Text color={BRAND} bold>
+            daily.dev · For You
+          </Text>
+          <Text dimColor>
+            {(await read($, index)) + 1}/{list.length}
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text bold wrap="truncate-end">
+            {post.title}
+          </Text>
+        </Box>
+        <Text dimColor wrap="truncate-end">
+          {meta}
         </Text>
-        <Text dimColor>
-          {post.source} · {post.readTime}m read · ▲{post.upvotes} · 💬{post.comments}
-        </Text>
-        {summary && <Text wrap="wrap">{summary}</Text>}
-        <Box>
-          <Link href={post.url} label="Open post" />
-          <Text> · </Text>
-          <Link href={post.commentsUrl} label="Discussion" />
-          <Text> </Text>
-          <Button key="prev" label="Prev" onPress={() => step($, -1)} />
-          <Button key="next" label="Next" onPress={() => step($, 1)} />
-          <Button key="hide" label="Hide" onPress={() => update($, isHidden, () => true)} />
+        {summary && (
+          <Box marginTop={1}>
+            <Text wrap="wrap">{summary}</Text>
+          </Box>
+        )}
+        <Box marginTop={1} justifyContent="space-between">
+          <Box gap={3}>
+            <Link href={post.url} label="↗ Read post" />
+            <Link href={post.commentsUrl} label="💬 Discussion" />
+          </Box>
+          <Box gap={1}>
+            <Button key="prev" label="◀ Prev" onPress={() => step($, -1)} />
+            <Button key="next" label="Next ▶" onPress={() => step($, 1)} />
+            <Button key="hide" label="Hide" onPress={() => update($, isHidden, () => true)} />
+          </Box>
         </Box>
       </Box>
     )

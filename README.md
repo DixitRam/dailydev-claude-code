@@ -3,17 +3,25 @@
 Read your daily.dev **For You** feed inside Claude Code while it works on your prompt. Waiting on the agent becomes reading time.
 
 ```
-daily.dev · Skills Modern Devs Should Focus On
-CodeHead · 5m read · ▲24 · 💬16
-A YouTube-style video argues that since AI can generate code quickly but unreliably,
-the core developer skills worth building are no longer typing speed but judgment…
-Open post · Discussion  [Prev] [Next] [Hide]
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ daily.dev · For You                                                    3/30 │
+│                                                                              │
+│ Skills Modern Devs Should Focus On                                           │
+│ CodeHead  ·  5 min read  ·  ▲ 24  ·  💬 16  ·  #career #cicd #sql            │
+│                                                                              │
+│ A YouTube-style video argues that since AI can generate code quickly but     │
+│ unreliably, the core developer skills worth building are no longer typing    │
+│ speed but judgment: knowing fundamentals, system design, shipping practices… │
+│                                                                              │
+│ ↗ Read post   💬 Discussion                          ◀ Prev  Next ▶  Hide │
+╰──────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ## What you get
 
 - One post from your personalized feed in a band above the prompt, shown only while Claude is working.
-- Title, source, read time, upvotes, comments and the post's summary.
+- Title, source, read time, upvotes, comments, top tags and a three-line summary, in a daily.dev-purple frame.
+- A `3/30` counter showing where you are in the batch.
 - Clickable links to the post and to its daily.dev discussion.
 - `Prev` / `Next` / `Hide` buttons, and a new post on every prompt.
 - `/dailydev` toggles the band on and off.
