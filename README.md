@@ -2,20 +2,7 @@
 
 Read your daily.dev **For You** feed inside Claude Code while it works on your prompt. Waiting on the agent becomes reading time.
 
-```
-╭──────────────────────────────────────────────────────────────────────────────╮
-│ daily.dev · For You                                                    3/30 │
-│                                                                              │
-│ Skills Modern Devs Should Focus On                                           │
-│ CodeHead  ·  5 min read  ·  ▲ 24  ·  💬 16  ·  #career #cicd #sql            │
-│                                                                              │
-│ A YouTube-style video argues that since AI can generate code quickly but     │
-│ unreliably, the core developer skills worth building are no longer typing    │
-│ speed but judgment: knowing fundamentals, system design, shipping practices… │
-│                                                                              │
-│ ↗ Read post   💬 Discussion                          ◀ Prev  Next ▶  Hide │
-╰──────────────────────────────────────────────────────────────────────────────╯
-```
+![daily.dev post shown above the prompt while Claude Code works](docs/screenshot.png)
 
 ## What you get
 
