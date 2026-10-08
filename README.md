@@ -1,8 +1,32 @@
-# daily.dev for Claude Code
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/logo/dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/logo/light.png">
+    <img alt="dailydev-feed for Claude Code" src="docs/logo/light.png" width="360">
+  </picture>
+</p>
 
-Read your daily.dev **For You** feed inside Claude Code while it works on your prompt. Waiting on the agent becomes reading time.
+<p align="center">
+  <a href=".claude-plugin/plugin.json"><img src="https://img.shields.io/badge/version-0.2.0-ce3df3?style=flat" alt="Version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT"></a>
+  <a href="https://code.claude.com/docs/en/plugins"><img src="https://img.shields.io/badge/Claude%20Code-plugin-d97757?style=flat" alt="Claude Code plugin"></a>
+  <a href="https://docs.daily.dev/mcp-server/"><img src="https://img.shields.io/badge/daily.dev-MCP-ce3df3?style=flat" alt="daily.dev MCP"></a>
+</p>
 
-![daily.dev post shown above the prompt while Claude Code works](docs/screenshot.png)
+<p align="center"><b>Waiting on Claude? Read daily.dev.</b></p>
+
+<p align="center">
+  <a href="#install">Install</a> |
+  <a href="#how-it-works">How it works</a> |
+  <a href="#api-usage">API usage</a> |
+  <a href="#develop">Develop</a>
+</p>
+
+<p align="center">
+  <img src="docs/hero.png" alt="A daily.dev post shown above the Claude Code prompt while Claude works" width="800">
+</p>
+
+Read your daily.dev **For You** feed inside Claude Code while it works on your prompt. One post per turn, with its summary, links and buttons to page through. Waiting on the agent becomes reading time.
 
 ## What you get
 
@@ -51,6 +75,8 @@ If the server is not connected or the sign-in has expired, the band simply stays
 
 ## Develop
 
+The README images are rendered from HTML in `docs/brand/` with `docs/brand/build.sh`.
+
 ```
 claude --plugin-dir .          # run it from this folder
 claude plugin validate .
@@ -61,4 +87,4 @@ The plugin is a single hooks module, `hooks/register.tsx`.
 
 ## License
 
-MIT
+MIT. Community plugin, not affiliated with daily.dev or Anthropic.

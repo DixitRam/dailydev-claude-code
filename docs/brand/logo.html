@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- Source of docs/logo/{light,dark}.png. Add ?dark to the URL for the dark variant. -->
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; }
+  body { width: 720px; height: 160px; display: flex; align-items: center; justify-content: center; gap: 22px; background: transparent; font-family: Inter, sans-serif; color: #0e1217; }
+  body.dark { color: #f5f7fa; }
+  .mark {
+    width: 104px; height: 104px; border-radius: 26px; background: linear-gradient(140deg, #e07bff, #ce3df3 55%, #9b1fd1);
+    display: flex; align-items: center; justify-content: center;
+    font: 600 46px 'JetBrains Mono', monospace; color: #fff; letter-spacing: -.06em;
+  }
+  .name { font-weight: 800; font-size: 54px; letter-spacing: -.04em; line-height: 1; }
+  .name small { display: block; font: 600 20px 'JetBrains Mono', monospace; letter-spacing: 0; color: #ce3df3; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <div class="mark">&gt;_</div>
+  <div class="name">dailydev-feed<small>for Claude Code</small></div>
+  <script>if (location.search.includes('dark')) document.body.className = 'dark'</script>
+</body>
+</html>
