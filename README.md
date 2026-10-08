@@ -75,8 +75,6 @@ If the server is not connected or the sign-in has expired, the band simply stays
 
 ## Develop
 
-The README images are rendered from HTML in `docs/brand/` with `docs/brand/build.sh`.
-
 ```
 claude --plugin-dir .          # run it from this folder
 claude plugin validate .
