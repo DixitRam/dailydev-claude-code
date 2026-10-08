@@ -1,0 +1,10 @@
+{
+  "name": "dailydev-feed",
+  "version": "0.1.0",
+  "description": "Read top posts from your daily.dev For You feed above the prompt while Claude works",
+  "author": { "name": "DixitRam" },
+  "homepage": "https://github.com/DixitRam/dailydev-claude-code",
+  "repository": "https://github.com/DixitRam/dailydev-claude-code",
+  "license": "MIT",
+  "types": "./types/index.d.ts"
+}

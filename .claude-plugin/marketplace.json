@@ -1,0 +1,5 @@
+{
+  "name": "dailydev-claude-code",
+  "owner": { "name": "DixitRam" },
+  "plugins": [{ "name": "dailydev-feed", "source": "./" }]
+}
