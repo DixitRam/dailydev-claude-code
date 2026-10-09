@@ -127,9 +127,15 @@ export const register: Register = on => {
           <Text color={BRAND} bold>
             daily.dev · For You
           </Text>
-          <Text dimColor>
-            {(await read($, index)) + 1}/{list.length}
-          </Text>
+          {/* Buttons live up here: the footer's links grow long where the terminal prints URLs. */}
+          <Box gap={1}>
+            <Text dimColor>
+              {(await read($, index)) + 1}/{list.length}
+            </Text>
+            <Button key="prev" label="◀ Prev" onPress={() => step($, -1)} />
+            <Button key="next" label="Next ▶" onPress={() => step($, 1)} />
+            <Button key="hide" label="Hide" onPress={() => update($, isHidden, () => true)} />
+          </Box>
         </Box>
         <Box marginTop={1}>
           <Text bold wrap="truncate-end">
@@ -144,16 +150,9 @@ export const register: Register = on => {
             <Text wrap="wrap">{summary}</Text>
           </Box>
         )}
-        <Box marginTop={1} justifyContent="space-between">
-          <Box gap={3}>
-            <Link href={post.url} label="↗ Read post" />
-            <Link href={post.commentsUrl} label="💬 Discussion" />
-          </Box>
-          <Box gap={1}>
-            <Button key="prev" label="◀ Prev" onPress={() => step($, -1)} />
-            <Button key="next" label="Next ▶" onPress={() => step($, 1)} />
-            <Button key="hide" label="Hide" onPress={() => update($, isHidden, () => true)} />
-          </Box>
+        <Box marginTop={1} gap={3} flexWrap="wrap">
+          <Link href={post.url} label="↗ Read post" />
+          <Link href={post.commentsUrl} label="💬 Discussion" />
         </Box>
       </Box>
     )

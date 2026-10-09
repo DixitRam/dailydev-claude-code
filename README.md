@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href=".claude-plugin/plugin.json"><img src="https://img.shields.io/badge/version-0.2.1-ce3df3?style=flat" alt="Version"></a>
+  <a href=".claude-plugin/plugin.json"><img src="https://img.shields.io/badge/version-0.2.2-ce3df3?style=flat" alt="Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT"></a>
   <a href="https://code.claude.com/docs/en/plugins"><img src="https://img.shields.io/badge/Claude%20Code-plugin-d97757?style=flat" alt="Claude Code plugin"></a>
   <a href="https://docs.daily.dev/mcp-server/"><img src="https://img.shields.io/badge/daily.dev-MCP-ce3df3?style=flat" alt="daily.dev MCP"></a>
