@@ -1,6 +1,6 @@
 {
   "name": "dailydev-feed",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Read top posts from your daily.dev For You feed above the prompt while Claude works",
   "author": { "name": "DixitRam" },
   "homepage": "https://github.com/DixitRam/dailydev-claude-code",

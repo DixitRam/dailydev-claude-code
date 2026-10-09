@@ -93,6 +93,12 @@ export const register: Register = on => {
     return { text: hidden ? 'daily.dev posts hidden.' : 'daily.dev posts shown while Claude works.' }
   })
 
+  // The session.start fetch can run before daily-dev connects; retry while empty.
+  on('turn.start', async ($, e, next) => {
+    if ((await read($, posts)).length === 0) void fetchFeed($)
+    return next(e)
+  })
+
   // New post for every prompt.
   on('turn.complete', async ($, e, next) => {
     await step($, 1)
